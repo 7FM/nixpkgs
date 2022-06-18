@@ -52,6 +52,27 @@ in
     };
   };
 
+  bedlevelingwizard = buildPlugin rec {
+    pname = "BedLevelingWizard";
+    version = "0.2.4";
+
+    src = fetchFromGitHub {
+      owner = "jneilliii";
+      repo = "OctoPrint-${pname}";
+      # Note that there is also a branch named 0.2.4!
+      # Hence, we need to specify the commit manually.s
+      rev = "9f6160f8aadca088c2406622c0c6980e46364546";
+      sha256 = "sha256-wxgO6JLsVeW9zocVkSv6tErCB59VYp3S7q/Ljfe0OZE=";
+    };
+
+    meta = with lib; {
+      description = "Plugin to aid in the process of manually leveling your bed";
+      homepage = "https://github.com/jneilliii/OctoPrint-BedLevelingWizard";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   bedlevelvisualizer = buildPlugin rec {
     pname = "BedLevelVisualizer";
     version = "1.1.0";
