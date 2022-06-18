@@ -323,6 +323,25 @@ in
     };
   };
 
+  resource_monitor = buildPlugin rec {
+    pname = "Resource-Monitor";
+    version = "0.3.6";
+
+    src = fetchFromGitHub {
+      owner = "Renaud11232";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "1w6h4hia286lbz2gy33rslq02iypx067yqn413xcipb07ivhvdqs";
+    };
+
+    meta = with lib; {
+      description = "A plugin to view the current CPU, RAM, disk and network usage on your system";
+      homepage = "https://github.com/Renaud11232/OctoPrint-Resource-Monitor";
+      license = licenses.mit;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   simpleemergencystop = buildPlugin rec {
     pname = "SimpleEmergencyStop";
     version = "1.0.5";
