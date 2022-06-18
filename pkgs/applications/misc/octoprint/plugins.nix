@@ -52,6 +52,25 @@ in
     };
   };
 
+  arc_welder = buildPlugin rec {
+    pname = "ArcWelderPlugin";
+    version = "1.0.0";
+
+    src = fetchFromGitHub {
+      owner = "FormerLurker";
+      repo = "${pname}";
+      rev = "${version}";
+      sha256 = "sha256-FFYeTP4v9hvL0T67c+hITbrS9la51tGMAyW89hWmpus=";
+    };
+
+    meta = with lib; {
+      description = "Anti-Stutter and GCode Compression. Replaces G0/G1 with G2/G3 where possible";
+      homepage = "https://github.com/FormerLurker/ArcWelderPlugin";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   autoscroll = buildPlugin rec {
     pname = "Autoscroll";
     version = "0.0.3";
