@@ -265,6 +265,25 @@ in
     };
   };
 
+  multilineterminal = buildPlugin rec {
+    pname = "MultiLineTerminal";
+    version = "0.1.5";
+
+    src = fetchFromGitHub {
+      owner = "jneilliii";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "sha256-8TJkWCYTaGO9v0fw4mYQLjJUgBRcJyWNn9AupsyxkiY=";
+    };
+
+    meta = with lib; {
+      description = "Makes the terminal input a multi line text area";
+      homepage = "https://github.com/jneilliii/OctoPrint-MultiLineTerminal";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   multipleupload = buildPlugin rec {
     pname = "MultipleUpload";
     version = "1.1.0";
