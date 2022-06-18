@@ -6,10 +6,14 @@ let
 
   cfg = config.services.octoprint;
 
+  stateDir = "${cfg.baseDir}/octoprint";
+  restartTriggerFile = "${cfg.baseDir}/restart";
+
   baseConfig = {
     plugins.curalegacy.cura_engine = "${pkgs.curaengine_stable}/bin/CuraEngine";
     server.host = cfg.host;
     server.port = cfg.port;
+    server.commands.serverRestartCommand = "touch ${restartTriggerFile}";
     webcam.ffmpeg = "${pkgs.ffmpeg.bin}/bin/ffmpeg";
   };
 
@@ -59,10 +63,10 @@ in
         description = lib.mdDoc "Group for the daemon.";
       };
 
-      stateDir = mkOption {
+      baseDir = mkOption {
         type = types.path;
         default = "/var/lib/octoprint";
-        description = lib.mdDoc "State directory of the daemon.";
+        description = lib.mdDoc "Base directory of the daemon.";
       };
 
       plugins = mkOption {
@@ -99,8 +103,24 @@ in
     };
 
     systemd.tmpfiles.rules = [
-      "d '${cfg.stateDir}' - ${cfg.user} ${cfg.group} - -"
+      "d '${cfg.baseDir}' - ${cfg.user} ${cfg.group} - -"
+      "d '${stateDir}' - ${cfg.user} ${cfg.group} - -"
     ];
+
+    # Helper service to detect octoprint restart requests
+    systemd.paths.octoprint-restart-files = {
+      wantedBy = [ "octoprint.service" ];
+      pathConfig = {
+        Unit = "octoprint-restarter.service";
+        PathChanged = [ restartTriggerFile ];
+      };
+    };
+
+    # Helper service to restart the actual octoprint service
+    systemd.services.octoprint-restarter = {
+      serviceConfig.Type = "oneshot";
+      script = "systemctl restart octoprint.service";
+    };
 
     systemd.services.octoprint = {
       description = "OctoPrint, web interface for 3D printers";
@@ -109,17 +129,17 @@ in
       path = [ pluginsEnv ];
 
       preStart = ''
-        if [ -e "${cfg.stateDir}/config.yaml" ]; then
-          ${pkgs.yaml-merge}/bin/yaml-merge "${cfg.stateDir}/config.yaml" "${cfgUpdate}" > "${cfg.stateDir}/config.yaml.tmp"
-          mv "${cfg.stateDir}/config.yaml.tmp" "${cfg.stateDir}/config.yaml"
+        if [ -e "${stateDir}/config.yaml" ]; then
+          ${pkgs.yaml-merge}/bin/yaml-merge "${stateDir}/config.yaml" "${cfgUpdate}" > "${stateDir}/config.yaml.tmp"
+          mv "${stateDir}/config.yaml.tmp" "${stateDir}/config.yaml"
         else
-          cp "${cfgUpdate}" "${cfg.stateDir}/config.yaml"
-          chmod 600 "${cfg.stateDir}/config.yaml"
+          cp "${cfgUpdate}" "${stateDir}/config.yaml"
+          chmod 600 "${stateDir}/config.yaml"
         fi
       '';
 
       serviceConfig = {
-        ExecStart = "${pluginsEnv}/bin/octoprint serve -b ${cfg.stateDir}";
+        ExecStart = "${pluginsEnv}/bin/octoprint serve -b ${stateDir}";
         User = cfg.user;
         Group = cfg.group;
         SupplementaryGroups = [
