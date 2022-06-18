@@ -265,6 +265,25 @@ in
     };
   };
 
+  multipleupload = buildPlugin rec {
+    pname = "MultipleUpload";
+    version = "1.1.0";
+
+    src = fetchFromGitHub {
+      owner = "eyal0";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "1w6h4hia286lbz2gy33rslq02iypx067yqn413xcipb07ivhvdqs";
+    };
+
+    meta = with lib; {
+      description = "Allow uploading multiple files at once";
+      homepage = "https://github.com/eyal0/OctoPrint-MultipleUpload";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   navbartemp = buildPlugin rec {
     pname = "NavbarTemp";
     version = "0.14";
