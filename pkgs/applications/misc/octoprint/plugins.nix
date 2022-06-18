@@ -168,6 +168,25 @@ in
     };
   };
 
+  enclosure = buildPlugin rec {
+    pname = "Enclosure";
+    version = "4.13.2";
+
+    src = fetchFromGitHub {
+      owner = "vitormhenrique";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "1w6h4hia286lbz2gy33rslq02iypx067yqn413xcipb07ivhvdqs";
+    };
+
+    meta = with lib; {
+      description = "Control printer environment (Temperature control / Lights / Fans and Filament Sensor) using Raspberry Pi GPIO";
+      homepage = "https://github.com/vitormhenrique/OctoPrint-Enclosure";
+      license = licenses.gpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   ender3v2tempfix = buildPlugin rec {
     pname = "OctoPrintPlugin-ender3v2tempfix";
     version = "unstable-2021-04-27";
