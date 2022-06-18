@@ -265,6 +265,25 @@ in
     };
   };
 
+  navbartemp = buildPlugin rec {
+    pname = "NavbarTemp";
+    version = "0.14";
+
+    src = fetchFromGitHub {
+      owner = "imrahil";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "1w6h4hia286lbz2gy33rslq02iypx067yqn413xcipb07ivhvdqs";
+    };
+
+    meta = with lib; {
+      description = "Display temperatures on navbar";
+      homepage = "https://github.com/imrahil/OctoPrint-NavbarTemp";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   printtimegenius = buildPlugin rec {
     pname = "PrintTimeGenius";
     version = "2.2.8";
