@@ -187,6 +187,25 @@ in
     };
   };
 
+  excluderegion = buildPlugin rec {
+    pname = "ExcludeRegionPlugin";
+    version = "0.3.0";
+
+    src = fetchFromGitHub {
+      owner = "bradcfisher";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "1w6h4hia286lbz2gy33rslq02iypx067yqn413xcipb07ivhvdqs";
+    };
+
+    meta = with lib; {
+      description = "Adds the ability to prevent printing within rectangular or circular regions of the currently active gcode file";
+      homepage = "https://github.com/bradcfisher/OctoPrint-ExcludeRegionPlugin";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   floatingnavbar = buildPlugin rec {
     pname = "FloatingNavbar";
     version = "0.3.7";
