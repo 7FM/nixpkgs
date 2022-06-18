@@ -206,6 +206,25 @@ in
     };
   };
 
+  heatertimeout = buildPlugin rec {
+    pname = "HeaterTimeout";
+    version = "0.0.4";
+
+    src = fetchFromGitHub {
+      owner = "Andy-ch";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "sha256-F3QZ/VhjO7eo5xGxVuOPwbrm24+zor4CUu7+JmXzDXw=";
+    };
+
+    meta = with lib; {
+      description = "Automatically shut off heaters if no print has been started";
+      homepage = "https://github.com/Andy-ch/OctoPrint-HeaterTimeout";
+      license = licenses.asl20;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   marlingcodedocumentation = buildPlugin rec {
     pname = "MarlinGcodeDocumentation";
     version = "0.13.0";
