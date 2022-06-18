@@ -73,6 +73,25 @@ in
     };
   };
 
+  bltouch = buildPlugin rec {
+    pname = "BLTouch";
+    version = "0.3.4";
+
+    src = fetchFromGitHub {
+      owner = "jneilliii";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "1w6h4hia286lbz2gy33rslq02iypx067yqn413xcipb07ivhvdqs";
+    };
+
+    meta = with lib; {
+      description = "Simple plugin to add BLTouch controls to the Control tab";
+      homepage = "https://github.com/jneilliii/OctoPrint-BLTouch";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   costestimation = buildPlugin rec {
     pname = "CostEstimation";
     version = "3.4.0";
