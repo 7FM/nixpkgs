@@ -380,6 +380,25 @@ in
     };
   };
 
+  taborder = buildPlugin rec {
+    pname = "OctoPrint-TabOrder";
+    version = "0.5.12";
+
+    src = fetchFromGitHub {
+      owner = "jneilliii";
+      repo = "${pname}";
+      rev = "${version}";
+      sha256 = "1w6h4hia286lbz2gy33rslq02iypx067yqn413xcipb07ivhvdqs";
+    };
+
+    meta = with lib; {
+      description = "Simple plugin to allow the ordering of tabs within OctoPrint";
+      homepage = "https://github.com/jneilliii/OctoPrint-TabOrder";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   telegram = buildPlugin rec {
     pname = "Telegram";
     version = "1.6.5";
