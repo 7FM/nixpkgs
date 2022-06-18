@@ -168,6 +168,27 @@ in
     };
   };
 
+  emergencystopsimplified = buildPlugin rec {
+    pname = "Emergency_stop_simplified";
+    version = "0.1.1";
+
+    src = fetchFromGitHub {
+      owner = "Mechazawa";
+      repo = "${pname}";
+      rev = "${version}";
+      sha256 = "sha256-41pxUu6OHp0im/2n1Z9JuBN3zzoGlY2qqFUx9/srfAM=";
+    };
+
+    propagatedBuildInputs = with super; [ rpi-gpio ];
+
+    meta = with lib; {
+      description = "This plugin reacts to a switch or button, if triggered (switch open) it issues M112 command to printer";
+      homepage = "https://github.com/Mechazawa/Emergency_stop_simplified";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   enclosure = buildPlugin rec {
     pname = "Enclosure";
     version = "4.13.2";
