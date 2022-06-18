@@ -52,6 +52,25 @@ in
     };
   };
 
+  autoscroll = buildPlugin rec {
+    pname = "Autoscroll";
+    version = "0.0.3";
+
+    src = fetchFromGitHub {
+      owner = "MoonshineSG";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "1w6h4hia286lbz2gy33rslq02iypx067yqn413xcipb07ivhvdqs";
+    };
+
+    meta = with lib; {
+      description = "Turn on/off terminal autoscroll when scrolling up/down";
+      homepage = "https://github.com/MoonshineSG/OctoPrint-Autoscroll";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   bedlevelingwizard = buildPlugin rec {
     pname = "BedLevelingWizard";
     version = "0.2.4";
