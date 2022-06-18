@@ -458,6 +458,25 @@ in
     };
   };
 
+  uploadanything = buildPlugin rec {
+    pname = "UploadAnything";
+    version = "1.0.1";
+
+    src = fetchFromGitHub {
+      owner = "rlogiacco";
+      repo = pname;
+      rev = "560d230352e94fbf37c57476a60978713321643e";
+      sha256 = "sha256-52Jq53nqJ0QbOUKvs3fPls5G+ERR3nre62nXb27R27Y=";
+    };
+
+    meta = with lib; {
+      description = "Allows custom file types to be uploaded via the web interface";
+      homepage = "https://github.com/rlogiacco/UploadAnything";
+      license = licenses.asl20;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   webcamtab = buildPlugin rec {
     pname = "WebcamTab";
     version = "0.3.0";
