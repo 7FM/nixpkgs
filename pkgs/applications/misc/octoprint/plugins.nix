@@ -187,6 +187,25 @@ in
     };
   };
 
+  floatingnavbar = buildPlugin rec {
+    pname = "FloatingNavbar";
+    version = "0.3.7";
+
+    src = fetchFromGitHub {
+      owner = "jneilliii";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "1w6h4hia286lbz2gy33rslq02iypx067yqn413xcipb07ivhvdqs";
+    };
+
+    meta = with lib; {
+      description = "Make the navbar float/stick to the top of the page";
+      homepage = "https://github.com/jneilliii/OctoPrint-FloatingNavbar";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   gcodeeditor = buildPlugin rec {
     pname = "GcodeEditor";
     version = "0.2.12";
