@@ -458,6 +458,25 @@ in
     };
   };
 
+  webcamtab = buildPlugin rec {
+    pname = "WebcamTab";
+    version = "0.3.0";
+
+    src = fetchFromGitHub {
+      owner = "gruvin";
+      repo = "OctoPrint-${pname}";
+      rev = "${version}";
+      sha256 = "sha256-5c4uuwFzS4BaZMP00kfQKq6aHnCHms979DbQ6PlCROw=";
+    };
+
+    meta = with lib; {
+      description = "Moves the webcam stream from Control tab to its own Webcam tab";
+      homepage = "https://github.com/gruvin/OctoPrint-WebcamTab";
+      license = licenses.agpl3Only;
+      maintainers = with maintainers; [ _7FM ];
+    };
+  };
+
   octoklipper = buildPlugin rec {
     pname = "OctoKlipper";
     version = "0.3.8.3";
