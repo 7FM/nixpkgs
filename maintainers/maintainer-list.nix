@@ -119,6 +119,12 @@
     githubId = 12578560;
     name = "Quinn Bohner";
   };
+  _7FM = {
+    email = "41307817+7FM@users.noreply.github.com";
+    github = "7FM";
+    githubId = 41307817;
+    name = "7FM";
+  };
   a1russell = {
     email = "adamlr6+pub@gmail.com";
     github = "a1russell";
