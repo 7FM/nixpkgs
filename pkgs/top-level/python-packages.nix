@@ -9731,6 +9731,8 @@ in {
 
   rpi-gpio2 = callPackage ../development/python-modules/rpi-gpio2 { };
 
+  rpio = callPackage ../development/python-modules/rpio { };
+
   rplcd = callPackage ../development/python-modules/rplcd { };
 
   rply = callPackage ../development/python-modules/rply { };
