@@ -1193,7 +1193,7 @@ rec {
         };
 
 
-      in streamLayeredImage {
+      in streamLayeredImage rec {
         inherit name tag;
         contents = [
           binSh
@@ -1235,6 +1235,7 @@ rec {
           else [ shell rcfile ];
         config.WorkingDir = sandboxBuildDir;
         config.Env = lib.mapAttrsToList (name: value: "${name}=${value}") envVars;
+        config.Entrypoint = config.Cmd;
       };
 
   # Wrapper around streamNixShellImage to build an image from the result
