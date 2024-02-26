@@ -1235,7 +1235,7 @@ rec {
           else [ shell rcfile ];
         config.WorkingDir = sandboxBuildDir;
         config.Env = lib.mapAttrsToList (name: value: "${name}=${value}") envVars;
-        config.Entrypoint = config.Cmd ++ [ "-c" ];
+        config.Entrypoint = config.Cmd ++ [ "-ci" ];
       };
 
   # Wrapper around streamNixShellImage to build an image from the result
